@@ -27,6 +27,7 @@ public class ExclusionManager {
         long excludeTicksLived = exclusionSettings.youngerThan.get();
         boolean excludePickupable = exclusionSettings.pickupable.get();
         boolean excludeMounted = exclusionSettings.mounted.get();
+        boolean excludeNaturallySpawned = exclusionSettings.naturallySpawned.get();
         return snapshotEntity -> {
             if (excludeLeashed && snapshotEntity.isLeashed()) {
                 return true;
@@ -47,6 +48,9 @@ public class ExclusionManager {
                 return true;
             }
             if (excludeMounted && snapshotEntity.isMounted()) {
+                return true;
+            }
+            if (excludeNaturallySpawned && snapshotEntity.isNaturallySpawned()) {
                 return true;
             }
             if (snapshotEntity.getTicksLived() < excludeTicksLived) {

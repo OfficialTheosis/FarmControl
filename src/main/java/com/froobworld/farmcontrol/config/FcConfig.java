@@ -109,6 +109,9 @@ public class FcConfig extends NabConfiguration {
             @Entry(key = "mounted")
             public final ConfigEntry<Boolean> mounted = new ConfigEntry<>();
 
+            @Entry(key = "naturally-spawned")
+            public final ConfigEntry<Boolean> naturallySpawned = new ConfigEntry<>();
+
             @Entry(key = "younger-than")
             public final ConfigEntry<Long> youngerThan = ConfigEntries.longEntry();
 

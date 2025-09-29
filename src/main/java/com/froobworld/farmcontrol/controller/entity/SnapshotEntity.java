@@ -3,6 +3,7 @@ package com.froobworld.farmcontrol.controller.entity;
 import com.froobworld.farmcontrol.data.FcData;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.material.Colorable;
 import org.bukkit.util.Vector;
 
@@ -24,6 +25,7 @@ public class SnapshotEntity {
     private final int ticksLived;
     private final boolean pickupable;
     private final boolean mounted;
+    private final boolean naturallySpawned;
     private final List<Object> classifications = new ArrayList<>();
 
     public SnapshotEntity(Entity entity) {
@@ -39,6 +41,7 @@ public class SnapshotEntity {
         this.pickupable = entity instanceof AbstractArrow && ((AbstractArrow) entity).getPickupStatus() == AbstractArrow.PickupStatus.ALLOWED;
         this.ticksLived = entity.getTicksLived();
         this.mounted = !entity.getPassengers().isEmpty();
+        this.naturallySpawned = entity.getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL;
         classifications.add(entity.getType());
         if (entity instanceof Colorable) {
             DyeColor colour = ((Colorable) entity).getColor();
@@ -122,6 +125,10 @@ public class SnapshotEntity {
 
     public boolean isMounted() {
         return mounted;
+    }
+
+    public boolean isNaturallySpawned () {
+        return naturallySpawned;
     }
 
     public int getTicksLived() {
