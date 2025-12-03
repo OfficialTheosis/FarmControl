@@ -2,7 +2,16 @@ package com.froobworld.farmcontrol.controller.entity;
 
 import com.froobworld.farmcontrol.data.FcData;
 import org.bukkit.DyeColor;
-import org.bukkit.entity.*;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Boat;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Raider;
+import org.bukkit.entity.Tameable;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.material.Colorable;
 import org.bukkit.util.Vector;
@@ -25,7 +34,7 @@ public class SnapshotEntity {
     private final int ticksLived;
     private final boolean pickupable;
     private final boolean mounted;
-    private final boolean naturallySpawned;
+    private final boolean naturallySpawnedMobCapContributor;
     private final List<Object> classifications = new ArrayList<>();
 
     public SnapshotEntity(Entity entity) {
@@ -41,7 +50,7 @@ public class SnapshotEntity {
         this.pickupable = entity instanceof AbstractArrow && ((AbstractArrow) entity).getPickupStatus() == AbstractArrow.PickupStatus.ALLOWED;
         this.ticksLived = entity.getTicksLived();
         this.mounted = !entity.getPassengers().isEmpty();
-        this.naturallySpawned = entity.getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL;
+        this.naturallySpawnedMobCapContributor = entity.getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL && !(entity instanceof Raider raider && raider.getRaid() != null);
         classifications.add(entity.getType());
         if (entity instanceof Colorable) {
             DyeColor colour = ((Colorable) entity).getColor();
@@ -127,8 +136,8 @@ public class SnapshotEntity {
         return mounted;
     }
 
-    public boolean isNaturallySpawned () {
-        return naturallySpawned;
+    public boolean isANaturallySpawnedMobCapContributor () {
+        return naturallySpawnedMobCapContributor;
     }
 
     public int getTicksLived() {
