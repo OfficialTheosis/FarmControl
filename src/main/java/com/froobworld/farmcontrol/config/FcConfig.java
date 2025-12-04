@@ -114,8 +114,8 @@ public class FcConfig extends NabConfiguration {
             @Entry(key = "mounted")
             public final ConfigEntry<Boolean> mounted = new ConfigEntry<>();
 
-            @Entry(key = "naturally-spawned-mob-cap-contributors")
-            public final ConfigEntry<Boolean> naturallySpawnedMobCapContributors = new ConfigEntry<>();
+            @Entry(key = "naturally-spawned-mob-cap-contributor")
+            public final ConfigEntry<Boolean> naturallySpawnedMobCapContributor = new ConfigEntry<>();
 
             @Entry(key = "younger-than")
             public final ConfigEntry<Long> youngerThan = ConfigEntries.longEntry();
