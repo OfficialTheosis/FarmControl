@@ -50,7 +50,7 @@ public class SnapshotEntity {
         this.pickupable = entity instanceof AbstractArrow && ((AbstractArrow) entity).getPickupStatus() == AbstractArrow.PickupStatus.ALLOWED;
         this.ticksLived = entity.getTicksLived();
         this.mounted = !entity.getPassengers().isEmpty();
-        this.naturallySpawnedMobCapContributor = entity.getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL && !(entity instanceof Raider raider && raider.getRaid() != null);
+        this.naturallySpawnedMobCapContributor = entity.getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.NATURAL && entity.getType() != EntityType.WARDEN && !(entity instanceof Raider raider && raider.getRaid() != null);
         classifications.add(entity.getType());
         if (entity instanceof Colorable) {
             DyeColor colour = ((Colorable) entity).getColor();
